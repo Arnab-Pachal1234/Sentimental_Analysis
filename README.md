@@ -1,123 +1,131 @@
-🎬 IMDB Sentiment Analysis using Naive Bayes
+# IMDB Sentiment Analysis using Naive Bayes 🎬📝
 
-This project performs sentiment analysis on IMDB movie reviews using Natural Language Processing (NLP) techniques and Naive Bayes classifiers.
-The goal is to classify movie reviews as positive or negative and compare the performance of different Naive Bayes variants.
+This project performs **sentiment analysis** on IMDB movie reviews using **Natural Language Processing (NLP)** techniques and **Naive Bayes classifiers**. The goal is to classify movie reviews as **positive** or **negative** and compare the performance of different Naive Bayes variants.
 
-📌 Dataset
+---
 
-Source: IMDB Movie Reviews Dataset
+## 📂 Dataset
 
-Total records used: 10,000 (randomly sampled from 50,000)
+* **File name**: `IMDB.csv`
+* **Description**: Contains 50,000 movie reviews with sentiment labels (positive/negative).
+* **Sample used**: 10,000 randomly sampled reviews for faster computation.
+* ⚠️ Ensure `IMDB.csv` is present in the project root directory before running the code.
 
-Columns:
+---
 
-review → Movie review text
+## 🛠️ Technologies & Libraries Used
 
-sentiment → Positive / Negative (encoded as 1 / 0)
+* Python 3.x
+* NumPy – Numerical computations
+* Pandas – Data manipulation
+* NLTK – Natural Language Processing
+* Scikit-learn – Machine learning algorithms
 
-🧹 Text Preprocessing Steps
+```bash
+pip install numpy pandas nltk scikit-learn
+```
 
-The following preprocessing steps were applied to clean and prepare the text data:
+---
 
-HTML Tag Removal
+## 🔍 Workflow Overview
 
-Removed tags like <br /> using Regular Expressions.
+### 1️⃣ Data Loading & Inspection
 
-Lowercasing
+* Load CSV data using Pandas
+* Inspect dataset shape and head
+* Check for null values
+* View summary statistics
 
-Converted all text to lowercase.
+### 2️⃣ Data Cleaning
 
-Special Character Removal
+* Remove HTML tags using Regular Expressions
+* Convert text to lowercase
+* Remove special characters
+* Remove stopwords using NLTK
+* Apply stemming using Porter Stemmer
 
-Retained only alphanumeric characters.
+### 3️⃣ Feature Extraction
 
-Stopword Removal
+* Convert text into numerical features using **Bag of Words** (`CountVectorizer`)
+* Final feature matrix shape: `(10000, 36187)`
+* Labels converted to 0 (negative) and 1 (positive)
 
-Removed common English stopwords using NLTK.
+### 4️⃣ Train-Test Split
 
-Stemming
+* Split data into **training (80%)** and **testing (20%)** sets
+* Shapes:
 
-Applied Porter Stemmer to reduce words to their root forms.
+  * `X_train`: (8000, 36187)
+  * `X_test`: (2000, 36187)
+* `y_train`: (8000,)
+* `y_test`: (2000,)
 
-Tokenization
+### 5️⃣ Model Training
 
-Converted reviews into lists of meaningful tokens.
+* Implemented three variants of **Naive Bayes**:
 
-🔢 Feature Extraction
+  1. GaussianNB
+  2. MultinomialNB
+  3. BernoulliNB
+* Fit each model on the training data
 
-Used Bag of Words (BoW) model via CountVectorizer
+### 6️⃣ Model Evaluation
 
-Converted text into a numerical matrix
+* Predicted sentiments for test data
+* Calculated accuracy for each model
 
-Final feature size: 36,187 unique words
+---
 
-X shape: (10000, 36187)
-y shape: (10000,)
+## 📊 Model Performance (Accuracy)
 
-🔀 Train-Test Split
+| Model         | Accuracy |
+| ------------- | -------- |
+| GaussianNB    | 63.35%   |
+| MultinomialNB | 83.70% ✅ |
+| BernoulliNB   | 80.85%   |
 
-Training set: 80% (8,000 samples)
+---
 
-Testing set: 20% (2,000 samples)
+## 📌 Conclusion
 
-🤖 Machine Learning Models Used
+* **Multinomial Naive Bayes** performed the best for text classification with word frequency features.
+* GaussianNB is less effective because it assumes normally distributed features, which is not ideal for sparse text data.
+* BernoulliNB works well for binary features but slightly lower than MultinomialNB.
 
-Three variants of Naive Bayes were implemented and compared:
+---
 
-Gaussian Naive Bayes
+## 🛠️ How to Run
 
-Multinomial Naive Bayes
+```bash
+python main.py
+```
 
-Bernoulli Naive Bayes
+> Or run the notebook cell-by-cell if using **Jupyter Notebook**.
 
-These models were trained to find the best classifier for sentiment prediction.
+---
 
-📊 Model Performance (Accuracy)
-Model	Accuracy
-GaussianNB	63.35%
-MultinomialNB	83.70% ✅
-BernoulliNB	80.85%
-🏆 Conclusion
+## 📁 Project Structure
 
-Multinomial Naive Bayes achieved the highest accuracy
+```
+├── IMDB.csv
+├── main.py
+├── README.md
+```
 
-It is best suited for text classification with word frequency features
+---
 
-GaussianNB performed poorly because it assumes normally distributed features, which is not ideal for sparse text data
+## ⭐ Key Takeaways
 
-🛠 Technologies & Libraries Used
+* Proper **text preprocessing** improves model performance.
+* **Bag of Words** and **Naive Bayes** are effective for sentiment classification.
+* Model choice matters depending on the **feature distribution**.
 
-Python
+---
 
-NumPy
+## 📜 License
 
-Pandas
+This project is for **educational purposes only**.
 
-NLTK
+---
 
-Scikit-learn
-
-Regular Expressions (re)
-
-Jupyter Notebook
-
-📁 Project Structure
-SentimentAnalysis.ipynb
-IMDB.csv
-README.md
-
-🚀 Future Improvements
-
-Use TF-IDF Vectorization
-
-Try Logistic Regression / SVM
-
-Apply Lemmatization instead of Stemming
-
-Perform Hyperparameter Tuning
-
-Add Confusion Matrix & F1-score
-
-✍️ Author
-
-Arnab
+## 🚀 Happy Learning & Sentiment Analysis!
